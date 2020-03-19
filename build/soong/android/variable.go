@@ -149,4 +149,3 @@ type ProductVariables struct {
 	Supports_hw_fde  							*bool `json:",omitempty"`
 	Supports_hw_fde_perf  						*bool `json:",omitempty"`
 }
-

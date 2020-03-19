@@ -107,3 +107,6 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/qcom/opensource/commonsys/packages/apps/Bluetooth \
     vendor/qcom/opensource/commonsys/system/bt/conf
 endif #TARGET_USE_QTI_BT_STACK
+
+PRODUCT_SOONG_NAMESPACES += \
+    hardware/qcom-caf/$(QCOM_HARDWARE_VARIANT)
