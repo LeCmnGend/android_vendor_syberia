@@ -25,7 +25,7 @@ CL_MAG="\033[35m"
 CL_CYN="\033[36m"
 CL_RST="\033[0m"
 
-MD5 := prebuilts/build-tools/path/$(HOST_PREBUILT_TAG)/md5sum
+SHA256 := prebuilts/build-tools/path/$(HOST_PREBUILT_TAG)/sha256sum
 
 ifeq ($(TARGET_BACON_NAME),)
     INTERNAL_BACON_NAME := $(TARGET_PRODUCT)-$(PLATFORM_VERSION)-$(shell date -u +%Y%m%d)
@@ -39,7 +39,7 @@ INTERNAL_BACON_TARGET := $(PRODUCT_OUT)/$(INTERNAL_BACON_NAME).zip
 bacon: syberia
 syberia: $(INTERNAL_OTA_PACKAGE_TARGET)
 	 $(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(INTERNAL_BACON_TARGET)
-	 $(hide) $(MD5) $(INTERNAL_BACON_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(INTERNAL_BACON_TARGET).md5sum
+	 $(hide) $(SHA256) $(INTERNAL_BACON_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(INTERNAL_BACON_TARGET).sha256sum
 	 @echo "Package Complete: $(INTERNAL_BACON_TARGET)" >&2
 	 @echo -e ${CL_RST}"                                                                    "${CL_RST}
 	 @echo -e ${CL_RED}"                                                                    "${CL_RED}
@@ -56,7 +56,7 @@ syberia: $(INTERNAL_OTA_PACKAGE_TARGET)
 	 @echo -e ${CL_RST}"                                                                    "${CL_RST}
 	 @echo -e ${CL_RED}"===================================================================="${CL_RED}
 	 @echo -e ${CL_RST}"$(INTERNAL_BACON_TARGET)                                            "${CL_RST}
-	 @echo -e ${CL_BLD}${CL_YLW}"MD5: "${CL_YLW}" `cat $(INTERNAL_BACON_TARGET).md5sum | awk '{print $$1}' `"${CL_RST}
+	 @echo -e ${CL_BLD}${CL_YLW}"MD5: "${CL_YLW}" `cat $(INTERNAL_BACON_TARGET).sha256sum | awk '{print $$1}' `"${CL_RST}
 	 @echo -e ${CL_BLD}${CL_YLW}"Size:"${CL_YLW}" `du -sh $(INTERNAL_BACON_TARGET) | awk '{print $$1}' `"${CL_RST}
 	 @echo -e ${CL_RED}"===================================================================="${CL_RED}
 	 @echo -e ${CL_RST}"                                                                    "${CL_RST}
