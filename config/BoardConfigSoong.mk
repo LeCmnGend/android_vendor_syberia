@@ -29,6 +29,8 @@ $(foreach v,$(EXPORT_TO_SOONG),$(eval $(call addVar,$(v))))
 SOONG_CONFIG_NAMESPACES += syberiaGlobalVars
 SOONG_CONFIG_syberiaGlobalVars += \
     inline_kernel_building \
+    camera_needs_client_info \
+    camera_needs_client_info_lib \
     display_use_smooth_motion
 
 SOONG_CONFIG_NAMESPACES += syberiaNvidiaVars
@@ -41,6 +43,8 @@ SOONG_CONFIG_syberiaQcomVars +=
 # Soong bool variables
 SOONG_CONFIG_syberiaNvidiaVars_uses_nvidia_enhancements := $(NV_ANDROID_FRAMEWORK_ENHANCEMENTS)
 SOONG_CONFIG_syberiaGlobalVars_inline_kernel_building := $(INLINE_KERNEL_BUILDING)
+SOONG_CONFIG_syberiaGlobalVars_camera_needs_client_info := $(TARGET_CAMERA_NEEDS_CLIENT_INFO)
+SOONG_CONFIG_syberiaGlobalVars_camera_needs_client_info_lib := $(TARGET_CAMERA_NEEDS_CLIENT_INFO_LIB)
 SOONG_CONFIG_syberiaGlobalVars_display_use_smooth_motion := $(TARGET_DISPLAY_USE_SMOOTH_MOTION)
 
 ifneq ($(TARGET_USE_QTI_BT_STACK),true)
