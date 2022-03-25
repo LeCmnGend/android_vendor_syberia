@@ -26,6 +26,19 @@ endef
 
 $(foreach v,$(EXPORT_TO_SOONG),$(eval $(call addVar,$(v))))
 
+SOONG_CONFIG_NAMESPACES += syberiaGlobalVars
+SOONG_CONFIG_syberiaGlobalVars +=
+
+SOONG_CONFIG_NAMESPACES += syberiaNvidiaVars
+SOONG_CONFIG_syberiaNvidiaVars += \
+    uses_nvidia_enhancements
+
+SOONG_CONFIG_NAMESPACES += syberiaQcomVars
+SOONG_CONFIG_syberiaQcomVars +=
+
+# Soong bool variables
+SOONG_CONFIG_syberiaNvidiaVars_uses_nvidia_enhancements := $(NV_ANDROID_FRAMEWORK_ENHANCEMENTS)
+
 ifneq ($(TARGET_USE_QTI_BT_STACK),true)
 PRODUCT_SOONG_NAMESPACES += packages/apps/Bluetooth
 endif #TARGET_USE_QTI_BT_STACK
