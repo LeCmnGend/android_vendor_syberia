@@ -22,4 +22,10 @@
     <!-- Googles Backup transport service -->
     <string name="def_backup_transport">com.google.android.gms/.backup.BackupTransportService</string>
 
-</resources> 
+    <integer name="def_screen_off_timeout">120000</integer>
+
+    <bool name="def_screen_brightness_automatic_mode">true</bool>
+
+    <!-- Default for Settings.System.VIBRATE_WHEN_RINGING -->
+    <bool name="def_vibrate_when_ringing">false</bool>
+</resources>
