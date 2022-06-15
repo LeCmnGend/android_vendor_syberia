@@ -34,6 +34,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.secure=0 \
     persist.service.adb.enable=1
 
+# Dex preopt
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    Launcher3QuickStep \
+    Settings \
+    SystemUI
+
 # Overlays
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/syberia/overlay
 PRODUCT_PACKAGE_OVERLAYS += \
