@@ -46,6 +46,24 @@ cc_library_headers {
     recovery_available: true,
 }
 
+// Target platform agnostic config modules
+soong_config_module_type {
+    name: "inline_kernel_building",
+    module_type: "cc_defaults",
+    config_namespace: "superiorGlobalVars",
+    bool_variables: ["inline_kernel_building"],
+    properties: ["cppflags"],
+}
+
+inline_kernel_building {
+    name: "inline_kernel_building_defaults",
+    soong_config_variables: {
+        inline_kernel_building: {
+            cppflags: ["-DINLINE_KERNEL_BUILD"],
+        },
+    },
+}
+
 // NVIDIA specific config modules
 soong_config_module_type {
     name: "nvidia_enhancements",
