@@ -18,6 +18,7 @@
 # limitations under the License.
 
 import base64
+import glob
 import json
 import netrc
 import os
@@ -109,6 +110,19 @@ def get_remote(manifest=None, remote_name=None):
             return remote
 
 
+def get_from_manifest(devicename):
+    for path in glob.glob(".repo/local_manifests/*.xml"):
+        try:
+            lm = ElementTree.parse(path)
+            lm = lm.getroot()
+        except:
+            lm = ElementTree.Element("manifest")
+
+        for localpath in lm.findall("project"):
+            if re.search("android_device_.*_%s$" % device, localpath.get("name")):
+                return localpath.get("path")
+
+
 def get_revision(manifest=None, p="build"):
     return custom_default_revision
 
@@ -122,11 +136,39 @@ def get_from_manifest(device_name):
     return None
 
 
-def is_in_manifest(project_path):
-    for local_path in load_manifest(custom_local_manifest).findall("project"):
-        if local_path.get("path") == project_path:
+def is_in_manifest(projectpath):
+    for path in glob.glob(".repo/local_manifests/*.xml"):
+        try:
+            lm = ElementTree.parse(path)
+            lm = lm.getroot()
+        except:
+            lm = ElementTree.Element("manifest")
+
+        for localpath in lm.findall("project"):
+            if localpath.get("path") == projectpath:
+                return True
+
+    # Search in main manifest, too
+    try:
+        lm = ElementTree.parse(get_manifest_path())
+        lm = lm.getroot()
+    except:
+        lm = ElementTree.Element("manifest")
+
+    for localpath in lm.findall("project"):
+        if localpath.get("path") == projectpath:
             return True
-    return False
+
+    # ... and don't forget the lineage snippet
+    try:
+        lm = ElementTree.parse(".repo/manifests/snippets/lineage.xml")
+        lm = lm.getroot()
+    except:
+        lm = ElementTree.Element("manifest")
+
+    for localpath in lm.findall("project"):
+        if localpath.get("path") == projectpath:
+            return True
 
 
 def add_to_manifest(repos, fallback_branch=None):
