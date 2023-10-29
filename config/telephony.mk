@@ -1,6 +1,11 @@
 # Inherit common stuff
 $(call inherit-product, vendor/syberia/config/common.mk)
 
+# GMS
+ifeq ($(WITH_GMS),true)
+WITH_GMS_COMMS_SUITE := true
+endif
+
 # Sensitive Phone Numbers list
 PRODUCT_COPY_FILES += \
     vendor/syberia/prebuilt/etc/selective-spn-conf.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/selective-spn-conf.xml
