@@ -148,3 +148,5 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.input.video_enabled=false
 
+# Certification if exists
+$(call inherit-product-if-exists, vendor/certification/config.mk)
