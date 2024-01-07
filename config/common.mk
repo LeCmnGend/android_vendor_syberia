@@ -3,6 +3,9 @@
 # Inherit art options
 include vendor/syberia/config/art.mk
 
+# Inherit art options
+$(call inherit-product, vendor/bcr/bcr.mk)
+
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase=android-google
